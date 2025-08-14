@@ -8,10 +8,9 @@ import java.util.function.Supplier;
  *
  * @param <R> The type of value that the wrapped callback returns
  */
-public class CountingSupplier<R> implements Supplier<R> {
+public class CountingSupplier<R> extends CountingWrapper implements Supplier<R> {
 
 	private final Supplier<R> callback;
-	private int callCount;
 
 
 	/**
@@ -23,7 +22,6 @@ public class CountingSupplier<R> implements Supplier<R> {
 	 */
 	public CountingSupplier(Supplier<R> callback) {
 		this.callback = Objects.requireNonNull(callback);
-		callCount = 0;
 	}
 
 	/**
@@ -34,16 +32,7 @@ public class CountingSupplier<R> implements Supplier<R> {
 	@Override
 	public R get() {
 		R r = callback.get();
-		++callCount;
+		addCallCount();
 		return r;
-	}
-
-	/**
-	 * Retrieve the number of times that this function has been invoked.
-	 *
-	 * @return the number of times this function has been invoked
-	 */
-	public int getCallCount() {
-		return callCount;
 	}
 }
