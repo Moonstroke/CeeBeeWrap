@@ -1,5 +1,6 @@
 package io.github.moonstroke.ceebeewrap;
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 /**
@@ -9,7 +10,10 @@ import java.util.function.BiFunction;
  * @param <U> The type of value that the wrapped callback accepts as second argument
  * @param <R> The type of value that the wrapped callback returns
  */
-public class CountingBiFunction<T, U, R> implements BiFunction<T, U, R> {
+public class CountingBiFunction<T, U, R> extends CountingWrapper implements BiFunction<T, U, R> {
+
+	private final BiFunction<T, U, R> callback;
+
 
 	/**
 	 * Wrap the given binary function in an object that retains its invocation count.
@@ -19,7 +23,7 @@ public class CountingBiFunction<T, U, R> implements BiFunction<T, U, R> {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public CountingBiFunction(BiFunction<T, U, R> callback) {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		this.callback = Objects.requireNonNull(callback);
 	}
 
 	/**
@@ -32,15 +36,8 @@ public class CountingBiFunction<T, U, R> implements BiFunction<T, U, R> {
 	 */
 	@Override
 	public R apply(T t, U u) {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
-	}
-
-	/**
-	 * Retrieve the number of times that this function has been invoked.
-	 *
-	 * @return the number of times this function has been invoked
-	 */
-	public int getCallCount() {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		R r = callback.apply(t, u);
+		addCallCount();
+		return r;
 	}
 }

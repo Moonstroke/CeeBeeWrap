@@ -1,5 +1,6 @@
 package io.github.moonstroke.ceebeewrap;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -7,7 +8,10 @@ import java.util.function.Consumer;
  *
  * @param <T> The type of value that the wrapped callback accepts
  */
-public class CountingConsumer<T> implements Consumer<T> {
+public class CountingConsumer<T> extends CountingWrapper implements Consumer<T> {
+
+	private final Consumer<T> callback;
+
 
 	/**
 	 * Wrap the given unary procedure in an object that retains its invocation count.
@@ -17,7 +21,7 @@ public class CountingConsumer<T> implements Consumer<T> {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public CountingConsumer(Consumer<T> callback) {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		this.callback = Objects.requireNonNull(callback);
 	}
 
 	/**
@@ -27,15 +31,7 @@ public class CountingConsumer<T> implements Consumer<T> {
 	 */
 	@Override
 	public void accept(T t) {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
-	}
-
-	/**
-	 * Retrieve the number of times that this procedure has been invoked.
-	 *
-	 * @return the number of times this procedure has been invoked
-	 */
-	public int getCallCount() {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		callback.accept(t);
+		addCallCount();
 	}
 }
