@@ -36,4 +36,13 @@ class CountingBiConsumerTest {
 		cbc.accept(new Object(), new Object());
 		assertEquals(2, cbc.getCallCount());
 	}
+
+	@Test
+	void testCountingBiConsumerCallbackThrowsHasCallCount1() {
+		CountingBiConsumer<Object, Object> cbc = new CountingBiConsumer<>((t, u) -> {
+			throw new RuntimeException("exception");
+		});
+		assertThrows(RuntimeException.class, () -> cbc.accept(new Object(), new Object()));
+		assertEquals(1, cbc.getCallCount());
+	}
 }

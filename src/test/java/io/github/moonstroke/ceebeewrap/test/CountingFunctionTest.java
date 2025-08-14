@@ -36,4 +36,13 @@ class CountingFunctionTest {
 		cf.apply(new Object());
 		assertEquals(2, cf.getCallCount());
 	}
+
+	@Test
+	void testCountingFunctionCallbackThrowsHasCallCount1() {
+		CountingFunction<Object, Object> cbc = new CountingFunction<>(t -> {
+			throw new RuntimeException("exception");
+		});
+		assertThrows(RuntimeException.class, () -> cbc.apply(new Object()));
+		assertEquals(1, cbc.getCallCount());
+	}
 }

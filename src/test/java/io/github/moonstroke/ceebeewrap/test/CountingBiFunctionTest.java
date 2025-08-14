@@ -36,4 +36,13 @@ class CountingBiFunctionTest {
 		cbf.apply(new Object(), new Object());
 		assertEquals(2, cbf.getCallCount());
 	}
+
+	@Test
+	void testCountingBiFunctionCallbackThrowsHasCallCount1() {
+		CountingBiFunction<Object, Object, Object> cbc = new CountingBiFunction<>((t, u) -> {
+			throw new RuntimeException("exception");
+		});
+		assertThrows(RuntimeException.class, () -> cbc.apply(new Object(), new Object()));
+		assertEquals(1, cbc.getCallCount());
+	}
 }

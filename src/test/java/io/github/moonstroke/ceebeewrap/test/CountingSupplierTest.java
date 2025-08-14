@@ -36,4 +36,13 @@ class CountingSupplierTest {
 		cs.get();
 		assertEquals(2, cs.getCallCount());
 	}
+
+	@Test
+	void testCountingSupplierCallbackThrowsHasCallCount1() {
+		CountingSupplier<Object> cbc = new CountingSupplier<>(() -> {
+			throw new RuntimeException("exception");
+		});
+		assertThrows(RuntimeException.class, cbc::get);
+		assertEquals(1, cbc.getCallCount());
+	}
 }
