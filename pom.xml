@@ -31,4 +31,9 @@
 		<connection>scm:git:${project.scm.url}</connection>
 		<developerConnection>${project.scm.connection}</developerConnection>
 	</scm>
+
+	<properties>
+		<maven.compiler.release>11</maven.compiler.release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 </project>
