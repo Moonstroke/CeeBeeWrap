@@ -1,5 +1,6 @@
 package io.github.moonstroke.ceebeewrap;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -9,6 +10,10 @@ import java.util.function.Supplier;
  */
 public class CountingSupplier<R> implements Supplier<R> {
 
+	private final Supplier<R> callback;
+	private int callCount;
+
+
 	/**
 	 * Wrap the given nullary function in an object that retains its invocation count.
 	 *
@@ -17,7 +22,8 @@ public class CountingSupplier<R> implements Supplier<R> {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public CountingSupplier(Supplier<R> callback) {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		this.callback = Objects.requireNonNull(callback);
+		callCount = 0;
 	}
 
 	/**
@@ -27,7 +33,9 @@ public class CountingSupplier<R> implements Supplier<R> {
 	 */
 	@Override
 	public R get() {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		R r = callback.get();
+		++callCount;
+		return r;
 	}
 
 	/**
@@ -36,6 +44,6 @@ public class CountingSupplier<R> implements Supplier<R> {
 	 * @return the number of times this function has been invoked
 	 */
 	public int getCallCount() {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		return callCount;
 	}
 }
