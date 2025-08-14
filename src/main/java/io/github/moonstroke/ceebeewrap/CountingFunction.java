@@ -1,5 +1,6 @@
 package io.github.moonstroke.ceebeewrap;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 /**
@@ -10,6 +11,10 @@ import java.util.function.Function;
  */
 public class CountingFunction<T, R> implements Function<T, R> {
 
+	private final Function<T, R> callback;
+	private int callCount;
+
+
 	/**
 	 * Wrap the given unary function in an object that retains its invocation count.
 	 *
@@ -18,7 +23,8 @@ public class CountingFunction<T, R> implements Function<T, R> {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public CountingFunction(Function<T, R> callback) {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		this.callback = Objects.requireNonNull(callback);
+		callCount = 0;
 	}
 
 	/**
@@ -30,7 +36,9 @@ public class CountingFunction<T, R> implements Function<T, R> {
 	 */
 	@Override
 	public R apply(T t) {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		R r = callback.apply(t);
+		++callCount;
+		return r;
 	}
 
 	/**
@@ -39,6 +47,6 @@ public class CountingFunction<T, R> implements Function<T, R> {
 	 * @return the number of times this function has been invoked
 	 */
 	public int getCallCount() {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		return callCount;
 	}
 }
