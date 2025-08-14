@@ -36,8 +36,10 @@ public class CountingBiFunction<T, U, R> extends CountingWrapper implements BiFu
 	 */
 	@Override
 	public R apply(T t, U u) {
-		R r = callback.apply(t, u);
-		addCallCount();
-		return r;
+		try {
+			return callback.apply(t, u);
+		} finally {
+			addCallCount();
+		}
 	}
 }

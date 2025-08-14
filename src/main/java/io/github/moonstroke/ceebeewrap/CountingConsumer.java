@@ -31,7 +31,10 @@ public class CountingConsumer<T> extends CountingWrapper implements Consumer<T> 
 	 */
 	@Override
 	public void accept(T t) {
-		callback.accept(t);
-		addCallCount();
+		try {
+			callback.accept(t);
+		} finally {
+			addCallCount();
+		}
 	}
 }

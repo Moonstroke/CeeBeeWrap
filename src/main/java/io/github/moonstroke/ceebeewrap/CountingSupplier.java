@@ -31,8 +31,10 @@ public class CountingSupplier<R> extends CountingWrapper implements Supplier<R> 
 	 */
 	@Override
 	public R get() {
-		R r = callback.get();
-		addCallCount();
-		return r;
+		try {
+			return callback.get();
+		} finally {
+			addCallCount();
+		}
 	}
 }

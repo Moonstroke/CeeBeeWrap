@@ -34,8 +34,10 @@ public class CountingFunction<T, R> extends CountingWrapper implements Function<
 	 */
 	@Override
 	public R apply(T t) {
-		R r = callback.apply(t);
-		addCallCount();
-		return r;
+		try {
+			return callback.apply(t);
+		} finally {
+			addCallCount();
+		}
 	}
 }

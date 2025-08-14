@@ -33,7 +33,10 @@ public class CountingBiConsumer<T, U> extends CountingWrapper implements BiConsu
 	 */
 	@Override
 	public void accept(T t, U u) {
-		callback.accept(t, u);
-		addCallCount();
+		try {
+			callback.accept(t, u);
+		} finally {
+			addCallCount();
+		}
 	}
 }
