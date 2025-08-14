@@ -1,18 +1,20 @@
 package io.github.moonstroke.ceebeewrap;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * An abstract wrapper that keeps count of the number of times that it is invoked.
  */
 abstract class CountingWrapper {
 
-	private int callCount = 0;
+	private final AtomicInteger callCount = new AtomicInteger(0);
 
 
 	/**
 	 * Increase by one the retained number of times that the wrapper is invoked.
 	 */
 	protected void addCallCount() {
-		++callCount;
+		callCount.getAndIncrement();
 	}
 
 	/**
@@ -21,6 +23,6 @@ abstract class CountingWrapper {
 	 * @return the number of times this function has been invoked
 	 */
 	public int getCallCount() {
-		return callCount;
+		return callCount.get();
 	}
 }
