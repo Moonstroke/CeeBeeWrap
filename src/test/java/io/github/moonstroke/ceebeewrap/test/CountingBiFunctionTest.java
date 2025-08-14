@@ -1,0 +1,39 @@
+package io.github.moonstroke.ceebeewrap.test;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import io.github.moonstroke.ceebeewrap.CountingBiFunction;
+
+
+class CountingBiFunctionTest {
+
+	@Test
+	void testCountingBiFunctionNullCallbackFails() {
+		assertThrows(NullPointerException.class, () -> new CountingBiFunction<>(null));
+	}
+
+	@Test
+	void testCountingBiFunctionInvokedNeverHasCallCount0() {
+		CountingBiFunction<Object, Object, Boolean> cbf = new CountingBiFunction<>(Object::equals);
+		assertEquals(0, cbf.getCallCount());
+	}
+
+	@Test
+	void testCountingBiFunctionInvokedOnceHasCallCount1() {
+		CountingBiFunction<Object, Object, Boolean> cbf = new CountingBiFunction<>(Object::equals);
+		cbf.apply(new Object(), new Object());
+		assertEquals(1, cbf.getCallCount());
+	}
+
+	@Test
+	void testCountingBiFunctionInvokedTwiceHasCallCount2() {
+		CountingBiFunction<Object, Object, Boolean> cbf = new CountingBiFunction<>(Object::equals);
+		cbf.apply(new Object(), new Object());
+		cbf.apply(new Object(), new Object());
+		assertEquals(2, cbf.getCallCount());
+	}
+}
