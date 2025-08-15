@@ -104,7 +104,7 @@ public class Wrapper {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public static <T, U, R> EnsuringOnceBiFunction<T, U, R> ensuringOnce(BiFunction<T, U, R> callback) {
-		return new EnsuringOnceBiFunction<>();
+		return new EnsuringOnceBiFunction<>(Objects.requireNonNull(callback));
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class Wrapper {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public static <T> EnsuringOnceConsumer<T> ensuringOnce(Consumer<T> callback) {
-		return new EnsuringOnceConsumer<>();
+		return new EnsuringOnceConsumer<>(Objects.requireNonNull(callback));
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class Wrapper {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public static <T, U> EnsuringOnceBiConsumer<T, U> ensuringOnce(BiConsumer<T, U> callback) {
-		return new EnsuringOnceBiConsumer<>();
+		return new EnsuringOnceBiConsumer<>(Objects.requireNonNull(callback));
 	}
 
 	/**
@@ -141,6 +141,6 @@ public class Wrapper {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public static <R> EnsuringOnceSupplier<R> ensuringOnce(Supplier<R> callback) {
-		return new EnsuringOnceSupplier<>();
+		return new EnsuringOnceSupplier<>(Objects.requireNonNull(callback));
 	}
 }

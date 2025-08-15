@@ -9,6 +9,18 @@ import java.util.function.Supplier;
  */
 public class EnsuringOnceSupplier<R> extends EnsuringOnceWrapper implements Supplier<R> {
 
+	private final Supplier<R> callback;
+
+
+	/**
+	 * Wrap the given nullary function in an object that fails if it is called more than once.
+	 *
+	 * @param callback The function to wrap, not {@code null}
+	 */
+	EnsuringOnceSupplier(Supplier<R> callback) {
+		this.callback = callback;
+	}
+
 	/**
 	 * Invoke the wrapped function or fail if it has already been called.
 	 *
@@ -18,6 +30,7 @@ public class EnsuringOnceSupplier<R> extends EnsuringOnceWrapper implements Supp
 	 */
 	@Override
 	public R get() throws AssertionError {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		markCalled();
+		return callback.get();
 	}
 }

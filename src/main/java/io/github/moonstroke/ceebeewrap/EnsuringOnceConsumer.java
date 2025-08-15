@@ -9,6 +9,18 @@ import java.util.function.Consumer;
  */
 public class EnsuringOnceConsumer<T> extends EnsuringOnceWrapper implements Consumer<T> {
 
+	private final Consumer<T> callback;
+
+
+	/**
+	 * Wrap the given unary procedure in an object that fails if it is called more than once.
+	 *
+	 * @param callback The procedure to wrap, not {@code null}
+	 */
+	EnsuringOnceConsumer(Consumer<T> callback) {
+		this.callback = callback;
+	}
+
 	/**
 	 * Invoke the wrapped procedure or fail if it has already been called.
 	 *
@@ -18,6 +30,7 @@ public class EnsuringOnceConsumer<T> extends EnsuringOnceWrapper implements Cons
 	 */
 	@Override
 	public void accept(T t) throws AssertionError {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		markCalled();
+		callback.accept(t);
 	}
 }

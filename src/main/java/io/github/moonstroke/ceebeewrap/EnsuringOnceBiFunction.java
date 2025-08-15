@@ -11,6 +11,18 @@ import java.util.function.BiFunction;
  */
 public class EnsuringOnceBiFunction<T, U, R> extends EnsuringOnceWrapper implements BiFunction<T, U, R> {
 
+	private final BiFunction<T, U, R> callback;
+
+
+	/**
+	 * Wrap the given unary function in an object that fails if it is called more than once.
+	 *
+	 * @param callback The function to wrap, not {@code null}
+	 */
+	EnsuringOnceBiFunction(BiFunction<T, U, R> callback) {
+		this.callback = callback;
+	}
+
 	/**
 	 * Invoke the wrapped function or fail if it has already been called.
 	 *
@@ -23,6 +35,7 @@ public class EnsuringOnceBiFunction<T, U, R> extends EnsuringOnceWrapper impleme
 	 */
 	@Override
 	public R apply(T t, U u) throws AssertionError {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		markCalled();
+		return callback.apply(t, u);
 	}
 }

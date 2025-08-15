@@ -10,6 +10,18 @@ import java.util.function.BiConsumer;
  */
 public class EnsuringOnceBiConsumer<T, U> extends EnsuringOnceWrapper implements BiConsumer<T, U> {
 
+	private final BiConsumer<T, U> callback;
+
+
+	/**
+	 * Wrap the given unary procedure in an object that fails if it is called more than once.
+	 *
+	 * @param callback The procedure to wrap, not {@code null}
+	 */
+	EnsuringOnceBiConsumer(BiConsumer<T, U> callback) {
+		this.callback = callback;
+	}
+
 	/**
 	 * Invoke the wrapped procedure or fail if it has already been called.
 	 *
@@ -20,6 +32,7 @@ public class EnsuringOnceBiConsumer<T, U> extends EnsuringOnceWrapper implements
 	 */
 	@Override
 	public void accept(T t, U u) throws AssertionError {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		markCalled();
+		callback.accept(t, u);
 	}
 }
