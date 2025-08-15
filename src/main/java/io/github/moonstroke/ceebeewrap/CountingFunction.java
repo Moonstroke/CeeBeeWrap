@@ -21,7 +21,7 @@ public class CountingFunction<T, R> extends CountingWrapper implements Function<
 	 *
 	 * @throws NullPointerException if callback is {@code null}
 	 */
-	public CountingFunction(Function<T, R> callback) {
+	CountingFunction(Function<T, R> callback) {
 		this.callback = Objects.requireNonNull(callback);
 	}
 

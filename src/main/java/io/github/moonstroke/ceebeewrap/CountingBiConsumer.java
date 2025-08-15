@@ -21,7 +21,7 @@ public class CountingBiConsumer<T, U> extends CountingWrapper implements BiConsu
 	 *
 	 * @throws NullPointerException if callback is {@code null}
 	 */
-	public CountingBiConsumer(BiConsumer<T, U> callback) {
+	CountingBiConsumer(BiConsumer<T, U> callback) {
 		this.callback = Objects.requireNonNull(callback);
 	}
 

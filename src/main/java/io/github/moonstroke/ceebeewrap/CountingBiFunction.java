@@ -22,7 +22,7 @@ public class CountingBiFunction<T, U, R> extends CountingWrapper implements BiFu
 	 *
 	 * @throws NullPointerException if callback is {@code null}
 	 */
-	public CountingBiFunction(BiFunction<T, U, R> callback) {
+	CountingBiFunction(BiFunction<T, U, R> callback) {
 		this.callback = Objects.requireNonNull(callback);
 	}
 

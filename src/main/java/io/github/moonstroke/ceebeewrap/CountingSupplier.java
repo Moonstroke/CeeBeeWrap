@@ -20,7 +20,7 @@ public class CountingSupplier<R> extends CountingWrapper implements Supplier<R> 
 	 *
 	 * @throws NullPointerException if callback is {@code null}
 	 */
-	public CountingSupplier(Supplier<R> callback) {
+	CountingSupplier(Supplier<R> callback) {
 		this.callback = Objects.requireNonNull(callback);
 	}
 

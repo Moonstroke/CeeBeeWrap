@@ -20,7 +20,7 @@ public class CountingConsumer<T> extends CountingWrapper implements Consumer<T> 
 	 *
 	 * @throws NullPointerException if callback is {@code null}
 	 */
-	public CountingConsumer(Consumer<T> callback) {
+	CountingConsumer(Consumer<T> callback) {
 		this.callback = Objects.requireNonNull(callback);
 	}
 
