@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * An abstract wrapper that fails if it is invoked more than once.
  */
-abstract class EnsureCalledOnceWrapper {
+abstract class EnsuringOnceWrapper {
 
 	private final AtomicBoolean called = new AtomicBoolean(false);
 
