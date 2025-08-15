@@ -1,5 +1,6 @@
 package io.github.moonstroke.ceebeewrap;
 
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -89,7 +90,7 @@ public class Wrapper {
 	 * @throws NullPointerException if callback is {@code null}
 	 */
 	public static <T, R> EnsuringOnceFunction<T, R> ensuringOnce(Function<T, R> callback) {
-		return new EnsuringOnceFunction<>();
+		return new EnsuringOnceFunction<>(Objects.requireNonNull(callback));
 	}
 
 	/**

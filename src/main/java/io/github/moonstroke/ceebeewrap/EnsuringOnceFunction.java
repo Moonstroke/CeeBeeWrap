@@ -10,6 +10,18 @@ import java.util.function.Function;
  */
 public class EnsuringOnceFunction<T, R> extends EnsuringOnceWrapper implements Function<T, R> {
 
+	private final Function<T, R> callback;
+
+
+	/**
+	 * Wrap the given unary function in an object that fails if it is called more than once.
+	 *
+	 * @param callback The function to wrap, not {@code null}
+	 */
+	EnsuringOnceFunction(Function<T, R> callback) {
+		this.callback = callback;
+	}
+
 	/**
 	 * Invoke the wrapped function or fail if it has already been called.
 	 *
@@ -21,6 +33,7 @@ public class EnsuringOnceFunction<T, R> extends EnsuringOnceWrapper implements F
 	 */
 	@Override
 	public R apply(T t) throws AssertionError {
-		throw new UnsupportedOperationException("Not implemented"); // TODO
+		markCalled();
+		return callback.apply(t);
 	}
 }
