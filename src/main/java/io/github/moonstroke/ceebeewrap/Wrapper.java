@@ -26,7 +26,7 @@ public class Wrapper {
 	 * @return A unary function wrapper that delegates to the given callback
 	 */
 	public static <T, R> CountingFunction<T, R> counting(Function<T, R> callback) {
-		return new CountingFunction<>(callback);
+		return new CountingFunction<>(Objects.requireNonNull(callback));
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Wrapper {
 	 * @return A binary function wrapper that delegates to the given callback
 	 */
 	public static <T, U, R> CountingBiFunction<T, U, R> counting(BiFunction<T, U, R> callback) {
-		return new CountingBiFunction<>(callback);
+		return new CountingBiFunction<>(Objects.requireNonNull(callback));
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class Wrapper {
 	 * @return A unary procedure wrapper that delegates to the given callback
 	 */
 	public static <T> CountingConsumer<T> counting(Consumer<T> callback) {
-		return new CountingConsumer<>(callback);
+		return new CountingConsumer<>(Objects.requireNonNull(callback));
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class Wrapper {
 	 * @return A unary procedure wrapper that delegates to the given callback
 	 */
 	public static <T, U> CountingBiConsumer<T, U> counting(BiConsumer<T, U> callback) {
-		return new CountingBiConsumer<>(callback);
+		return new CountingBiConsumer<>(Objects.requireNonNull(callback));
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Wrapper {
 	 * @return A nullary function wrapper that delegates to the given callback
 	 */
 	public static <R> CountingSupplier<R> counting(Supplier<R> callback) {
-		return new CountingSupplier<>(callback);
+		return new CountingSupplier<>(Objects.requireNonNull(callback));
 	}
 
 	/**

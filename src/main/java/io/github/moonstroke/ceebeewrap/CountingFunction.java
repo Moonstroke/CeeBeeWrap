@@ -1,6 +1,5 @@
 package io.github.moonstroke.ceebeewrap;
 
-import java.util.Objects;
 import java.util.function.Function;
 
 /**
@@ -17,12 +16,10 @@ public class CountingFunction<T, R> extends CountingWrapper implements Function<
 	/**
 	 * Wrap the given unary function in an object that retains its invocation count.
 	 *
-	 * @param callback The function to wrap
-	 *
-	 * @throws NullPointerException if callback is {@code null}
+	 * @param callback The function to wrap, not {@code null}
 	 */
 	CountingFunction(Function<T, R> callback) {
-		this.callback = Objects.requireNonNull(callback);
+		this.callback = callback;
 	}
 
 	/**

@@ -1,6 +1,5 @@
 package io.github.moonstroke.ceebeewrap;
 
-import java.util.Objects;
 import java.util.function.BiFunction;
 
 /**
@@ -18,12 +17,10 @@ public class CountingBiFunction<T, U, R> extends CountingWrapper implements BiFu
 	/**
 	 * Wrap the given binary function in an object that retains its invocation count.
 	 *
-	 * @param callback The function to wrap
-	 *
-	 * @throws NullPointerException if callback is {@code null}
+	 * @param callback The function to wrap, not {@code null}
 	 */
 	CountingBiFunction(BiFunction<T, U, R> callback) {
-		this.callback = Objects.requireNonNull(callback);
+		this.callback = callback;
 	}
 
 	/**

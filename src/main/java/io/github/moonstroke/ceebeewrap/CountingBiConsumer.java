@@ -1,6 +1,5 @@
 package io.github.moonstroke.ceebeewrap;
 
-import java.util.Objects;
 import java.util.function.BiConsumer;
 
 /**
@@ -17,12 +16,10 @@ public class CountingBiConsumer<T, U> extends CountingWrapper implements BiConsu
 	/**
 	 * Wrap the given binary procedure in an object that retains its invocation count.
 	 *
-	 * @param callback The procedure to wrap
-	 *
-	 * @throws NullPointerException if callback is {@code null}
+	 * @param callback The procedure to wrap, not {@code null}
 	 */
 	CountingBiConsumer(BiConsumer<T, U> callback) {
-		this.callback = Objects.requireNonNull(callback);
+		this.callback = callback;
 	}
 
 	/**

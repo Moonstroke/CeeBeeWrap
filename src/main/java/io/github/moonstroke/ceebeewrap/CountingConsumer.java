@@ -1,6 +1,5 @@
 package io.github.moonstroke.ceebeewrap;
 
-import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -16,12 +15,10 @@ public class CountingConsumer<T> extends CountingWrapper implements Consumer<T> 
 	/**
 	 * Wrap the given unary procedure in an object that retains its invocation count.
 	 *
-	 * @param callback The procedure to wrap
-	 *
-	 * @throws NullPointerException if callback is {@code null}
+	 * @param callback The procedure to wrap, not {@code null}
 	 */
 	CountingConsumer(Consumer<T> callback) {
-		this.callback = Objects.requireNonNull(callback);
+		this.callback = callback;
 	}
 
 	/**
