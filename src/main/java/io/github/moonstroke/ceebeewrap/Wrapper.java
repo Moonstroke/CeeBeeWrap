@@ -78,4 +78,68 @@ public class Wrapper {
 	public static <R> CountingSupplier<R> counting(Supplier<R> callback) {
 		return new CountingSupplier<>(callback);
 	}
+
+	/**
+	 * Wrap the given unary function in an object that fails if it is called more than once.
+	 *
+	 * @param <T>      The function's argument type
+	 * @param <R>      The function's return type
+	 * @param callback The function to wrap
+	 *
+	 * @throws NullPointerException if callback is {@code null}
+	 */
+	public static <T, R> EnsuringOnceFunction<T, R> ensuringOnce(Function<T, R> callback) {
+		return new EnsuringOnceFunction<>();
+	}
+
+	/**
+	 * Wrap the given binary function in an object that fails if it is called more than once.
+	 *
+	 * @param <T>      The function's first argument type
+	 * @param <U>      The function's second argument type
+	 * @param <R>      The function's return type
+	 * @param callback The function to wrap
+	 *
+	 * @throws NullPointerException if callback is {@code null}
+	 */
+	public static <T, U, R> EnsuringOnceBiFunction<T, U, R> ensuringOnce(BiFunction<T, U, R> callback) {
+		return new EnsuringOnceBiFunction<>();
+	}
+
+	/**
+	 * Wrap the given unary procedure in an object that fails if it is called more than once.
+	 *
+	 * @param <T>      The procedure's argument type
+	 * @param callback The procedure to wrap
+	 *
+	 * @throws NullPointerException if callback is {@code null}
+	 */
+	public static <T> EnsuringOnceConsumer<T> ensuringOnce(Consumer<T> callback) {
+		return new EnsuringOnceConsumer<>();
+	}
+
+	/**
+	 * Wrap the given binary procedure in an object that fails if it is called more than once.
+	 *
+	 * @param <T>      The procedure's first argument type
+	 * @param <U>      The procedure's second argument type
+	 * @param callback The procedure to wrap
+	 *
+	 * @throws NullPointerException if callback is {@code null}
+	 */
+	public static <T, U> EnsuringOnceBiConsumer<T, U> ensuringOnce(BiConsumer<T, U> callback) {
+		return new EnsuringOnceBiConsumer<>();
+	}
+
+	/**
+	 * Wrap the given nullary function in an object that fails if it is called more than once.
+	 *
+	 * @param <R>      The function's return type
+	 * @param callback The function to wrap
+	 *
+	 * @throws NullPointerException if callback is {@code null}
+	 */
+	public static <R> EnsuringOnceSupplier<R> ensuringOnce(Supplier<R> callback) {
+		return new EnsuringOnceSupplier<>();
+	}
 }
