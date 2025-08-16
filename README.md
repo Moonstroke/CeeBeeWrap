@@ -41,7 +41,8 @@ There are wrappers that **count the number of times they are invoked**. This
 count can later be retrieved with a method of the class.
 
 There are wrappers that **fail when they are called more than once**. They fail
-by throwing an [assertion error][1].
+by throwing an [assertion error][1], and do so *before* the callback is invoked
+a second time.
 
 Wrappers of the last type **fail immediately when invoked**, and are not exactly
 wrappers as since they never invoke a callback there is nothing to wrap. Rather,
