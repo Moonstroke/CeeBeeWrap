@@ -32,3 +32,26 @@ not be exactly identical, and performance may be lower, but as the wrappers are
 intended for use in tests, the restriction is acceptable.
 
 Still, if the need arises, wrappers for other functional interfaces may be added.
+
+### Behavior of the wrappers
+
+There are three types of wrappers, distinguished by their behavior.
+
+There are wrappers that **count the number of times they are invoked**. This
+count can later be retrieved with a method of the class.
+
+There are wrappers that **fail when they are called more than once**. They fail
+by throwing an [assertion error][1].
+
+Wrappers of the last type **fail immediately when invoked**, and are not exactly
+wrappers as since they never invoke a callback there is nothing to wrap. Rather,
+these are functional placeholders. They fail in the same manner as the previous
+wrapper type (by throwing an [assertion error][1]).
+
+There is a public wrapper (or placeholder) class for each of the functional
+interfaces listed above.
+
+All these classes are implemented in a thread-safe manner, and can be used to
+wrap function objects shared by multiple threads.
+
+[1]: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/AssertionError.html "Link to class AssertionError"
