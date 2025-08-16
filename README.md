@@ -4,20 +4,20 @@
 
 ## Description
 
-This project provides wrappers for the standard Java generic functional
+CeeBeeWrap provides wrappers for the standard Java generic functional
 interfaces, to be used in tests.
 
 ### What is a *wrapper*?
 
 In the context of this project, a *wrapper* is any instance which comprises a
-function object and provides additional behavior to it, while being itself an
-instance of the same functional interface. This allows such instances to be
-injected in an instruction where the wrapped object is passed to take advantage
-of the added behavior.
+function object (referred to as the callback) and provides additional behavior
+to it, while being itself an instance of the same functional interface. This
+allows such instances to be injected in an instruction where the wrapped object
+is passed to take advantage of the added behavior.
 
 ### Wrapped functional interfaces
 
-The project provides wrappers for the following functional interfaces:
+Wrappers are provided for the following functional interfaces:
 
 * `java.util.function.Function`
 * `java.util.function.Consumer`
