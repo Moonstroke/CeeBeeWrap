@@ -22,21 +22,21 @@ class EnsuringOnceSupplierTest {
 	@Test
 	void testEnsuringOnceSupplierFirstCallSucceeds() {
 		EnsuringOnceSupplier<String> eof = Wrapper.ensuringOnce(new Object()::toString);
-		assertDoesNotThrow(() -> eof.get());
+		assertDoesNotThrow(eof::get);
 	}
 
 	@Test
 	void testEnsuringOnceSupplierSecondCallFails() {
 		EnsuringOnceSupplier<String> eof = Wrapper.ensuringOnce(new Object()::toString);
 		eof.get();
-		assertThrows(AssertionError.class, () -> eof.get());
+		assertThrows(AssertionError.class, eof::get);
 	}
 
 	@Test
 	void testEnsuringOnceSupplierFirstCallInvokesCallback() {
 		CountingSupplier<String> cf = Wrapper.counting(new Object()::toString);
 		EnsuringOnceSupplier<String> eof = Wrapper.ensuringOnce(cf);
-		assertDoesNotThrow(() -> eof.get());
+		assertDoesNotThrow(eof::get);
 		assertEquals(1, cf.getCallCount());
 	}
 
@@ -45,7 +45,7 @@ class EnsuringOnceSupplierTest {
 		CountingSupplier<String> cf = Wrapper.counting(new Object()::toString);
 		EnsuringOnceSupplier<String> eof = Wrapper.ensuringOnce(cf);
 		eof.get();
-		assertThrows(AssertionError.class, () -> eof.get());
+		assertThrows(AssertionError.class, eof::get);
 		assertEquals(1, cf.getCallCount());
 	}
 }
