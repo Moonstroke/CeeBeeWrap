@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.moonstroke</groupId>
 	<artifactId>ceebeewrap</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<name>CeeBeeWrap</name>
 	<description>Useful callback wrappers for tests</description>
