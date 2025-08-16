@@ -29,7 +29,8 @@ class EnsuringOnceConsumerTest {
 	void testEnsuringOnceConsumerSecondCallFails() {
 		EnsuringOnceConsumer<Object> eof = Wrapper.ensuringOnce((Consumer<Object>) Object::toString);
 		eof.accept(new Object());
-		assertThrows(AssertionError.class, () -> eof.accept(new Object()));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> eof.accept(object));
 	}
 
 	@Test
@@ -45,7 +46,8 @@ class EnsuringOnceConsumerTest {
 		CountingConsumer<Object> cf = Wrapper.counting((Consumer<Object>) Object::toString);
 		EnsuringOnceConsumer<Object> eof = Wrapper.ensuringOnce(cf);
 		eof.accept(new Object());
-		assertThrows(AssertionError.class, () -> eof.accept(new Object()));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> eof.accept(object));
 		assertEquals(1, cf.getCallCount());
 	}
 }

@@ -45,7 +45,9 @@ class CountingBiConsumerTest {
 		CountingBiConsumer<Object, Object> cbc = Wrapper.counting((BiConsumer<Object, Object>) (t, u) -> {
 			throw new RuntimeException("exception");
 		});
-		assertThrows(RuntimeException.class, () -> cbc.accept(new Object(), new Object()));
+		Object object1 = new Object();
+		Object object2 = new Object();
+		assertThrows(RuntimeException.class, () -> cbc.accept(object1, object2));
 		assertEquals(1, cbc.getCallCount());
 	}
 }

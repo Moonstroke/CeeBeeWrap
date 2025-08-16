@@ -29,7 +29,8 @@ class EnsuringOnceFunctionTest {
 	void testEnsuringOnceFunctionSecondCallFails() {
 		EnsuringOnceFunction<Object, String> eof = Wrapper.ensuringOnce(Object::toString);
 		eof.apply(new Object());
-		assertThrows(AssertionError.class, () -> eof.apply(new Object()));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> eof.apply(object));
 	}
 
 	@Test
@@ -45,7 +46,8 @@ class EnsuringOnceFunctionTest {
 		CountingFunction<Object, String> cf = Wrapper.counting(Object::toString);
 		EnsuringOnceFunction<Object, String> eof = Wrapper.ensuringOnce(cf);
 		eof.apply(new Object());
-		assertThrows(AssertionError.class, () -> eof.apply(new Object()));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> eof.apply(object));
 		assertEquals(1, cf.getCallCount());
 	}
 }

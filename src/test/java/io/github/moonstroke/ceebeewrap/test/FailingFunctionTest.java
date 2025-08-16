@@ -11,7 +11,8 @@ class FailingFunctionTest {
 	@Test
 	void testFailingFunctionAcceptNonNullFails() {
 		FailingFunction<Object, Object> ff = new FailingFunction<>();
-		assertThrows(AssertionError.class, () -> ff.apply(new Object()));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> ff.apply(object));
 	}
 
 	@Test

@@ -29,7 +29,9 @@ class EnsuringOnceBiFunctionTest {
 	void testEnsuringOnceFunctionSecondCallFails() {
 		EnsuringOnceBiFunction<Object, Object, Boolean> eobf = Wrapper.ensuringOnce(Object::equals);
 		eobf.apply(new Object(), new Object());
-		assertThrows(AssertionError.class, () -> eobf.apply(new Object(), new Object()));
+		Object object1 = new Object();
+		Object object2 = new Object();
+		assertThrows(AssertionError.class, () -> eobf.apply(object1, object2));
 	}
 
 	@Test
@@ -45,7 +47,9 @@ class EnsuringOnceBiFunctionTest {
 		CountingBiFunction<Object, Object, Boolean> cbf = Wrapper.counting(Object::equals);
 		EnsuringOnceBiFunction<Object, Object, Boolean> eobf = Wrapper.ensuringOnce(cbf);
 		eobf.apply(new Object(), new Object());
-		assertThrows(AssertionError.class, () -> eobf.apply(new Object(), new Object()));
+		Object object1 = new Object();
+		Object object2 = new Object();
+		assertThrows(AssertionError.class, () -> eobf.apply(object1, object2));
 		assertEquals(1, cbf.getCallCount());
 	}
 }

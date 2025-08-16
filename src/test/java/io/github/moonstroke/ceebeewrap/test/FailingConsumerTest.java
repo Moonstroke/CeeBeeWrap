@@ -11,7 +11,8 @@ class FailingConsumerTest {
 	@Test
 	void testFailingConsumerAcceptNonNullFails() {
 		FailingConsumer<Object> fc = new FailingConsumer<>();
-		assertThrows(AssertionError.class, () -> fc.accept(new Object()));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> fc.accept(object));
 	}
 
 	@Test

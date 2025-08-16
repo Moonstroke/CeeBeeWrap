@@ -46,7 +46,9 @@ class CountingBiFunctionTest {
 		                   Object> cbc = Wrapper.counting((BiFunction<Object, Object, Object>) (t, u) -> {
 			throw new RuntimeException("exception");
 		});
-		assertThrows(RuntimeException.class, () -> cbc.apply(new Object(), new Object()));
+		Object object1 = new Object();
+		Object object2 = new Object();
+		assertThrows(RuntimeException.class, () -> cbc.apply(object1, object2));
 		assertEquals(1, cbc.getCallCount());
 	}
 }

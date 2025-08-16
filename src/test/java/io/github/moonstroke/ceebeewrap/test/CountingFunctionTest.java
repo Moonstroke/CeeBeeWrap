@@ -45,7 +45,8 @@ class CountingFunctionTest {
 		CountingFunction<Object, Object> cbc = Wrapper.counting((Function<Object, Object>) t -> {
 			throw new RuntimeException("exception");
 		});
-		assertThrows(RuntimeException.class, () -> cbc.apply(new Object()));
+		Object object = new Object();
+		assertThrows(RuntimeException.class, () -> cbc.apply(object));
 		assertEquals(1, cbc.getCallCount());
 	}
 }

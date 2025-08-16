@@ -45,7 +45,8 @@ class CountingConsumerTest {
 		CountingConsumer<Object> cbc = Wrapper.counting((Consumer<Object>) t -> {
 			throw new RuntimeException("exception");
 		});
-		assertThrows(RuntimeException.class, () -> cbc.accept(new Object()));
+		Object object = new Object();
+		assertThrows(RuntimeException.class, () -> cbc.accept(object));
 		assertEquals(1, cbc.getCallCount());
 	}
 }

@@ -29,7 +29,9 @@ class EnsuringOnceBiConsumerTest {
 	void testEnsuringOnceConsumerSecondCallFails() {
 		EnsuringOnceBiConsumer<Object, Object> eobf = Wrapper.ensuringOnce((BiConsumer<Object, Object>) Object::equals);
 		eobf.accept(new Object(), new Object());
-		assertThrows(AssertionError.class, () -> eobf.accept(new Object(), new Object()));
+		Object object1 = new Object();
+		Object object2 = new Object();
+		assertThrows(AssertionError.class, () -> eobf.accept(object1, object2));
 	}
 
 	@Test
@@ -45,7 +47,9 @@ class EnsuringOnceBiConsumerTest {
 		CountingBiConsumer<Object, Object> cbf = Wrapper.counting((BiConsumer<Object, Object>) Object::equals);
 		EnsuringOnceBiConsumer<Object, Object> eobf = Wrapper.ensuringOnce(cbf);
 		eobf.accept(new Object(), new Object());
-		assertThrows(AssertionError.class, () -> eobf.accept(new Object(), new Object()));
+		Object object1 = new Object();
+		Object object2 = new Object();
+		assertThrows(AssertionError.class, () -> eobf.accept(object1, object2));
 		assertEquals(1, cbf.getCallCount());
 	}
 }

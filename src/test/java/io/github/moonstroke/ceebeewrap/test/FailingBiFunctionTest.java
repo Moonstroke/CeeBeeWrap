@@ -11,19 +11,23 @@ class FailingBiFunctionTest {
 	@Test
 	void testFailingBiFunctionApplyNonNullNonNullFails() {
 		FailingBiFunction<Object, Object, Object> fbf = new FailingBiFunction<>();
-		assertThrows(AssertionError.class, () -> fbf.apply(new Object(), new Object()));
+		Object object1 = new Object();
+		Object object2 = new Object();
+		assertThrows(AssertionError.class, () -> fbf.apply(object1, object2));
 	}
 
 	@Test
 	void testFailingBiFunctionApplyNonNullNullFails() {
 		FailingBiFunction<Object, Object, Object> fbf = new FailingBiFunction<>();
-		assertThrows(AssertionError.class, () -> fbf.apply(new Object(), null));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> fbf.apply(object, null));
 	}
 
 	@Test
 	void testFailingBiFunctionApplyNullNonNullFails() {
 		FailingBiFunction<Object, Object, Object> fbf = new FailingBiFunction<>();
-		assertThrows(AssertionError.class, () -> fbf.apply(null, new Object()));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> fbf.apply(null, object));
 	}
 
 	@Test

@@ -11,19 +11,23 @@ class FailingBiConsumerTest {
 	@Test
 	void testFailingBiConsumerAcceptNonNullNonNullFails() {
 		FailingBiConsumer<Object, Object> fbc = new FailingBiConsumer<>();
-		assertThrows(AssertionError.class, () -> fbc.accept(new Object(), new Object()));
+		Object object1 = new Object();
+		Object object2 = new Object();
+		assertThrows(AssertionError.class, () -> fbc.accept(object1, object2));
 	}
 
 	@Test
 	void testFailingBiConsumerAcceptNonNullNullFails() {
 		FailingBiConsumer<Object, Object> fbc = new FailingBiConsumer<>();
-		assertThrows(AssertionError.class, () -> fbc.accept(new Object(), null));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> fbc.accept(object, null));
 	}
 
 	@Test
 	void testFailingBiConsumerAcceptNullNonNullFails() {
 		FailingBiConsumer<Object, Object> fbc = new FailingBiConsumer<>();
-		assertThrows(AssertionError.class, () -> fbc.accept(null, new Object()));
+		Object object = new Object();
+		assertThrows(AssertionError.class, () -> fbc.accept(null, object));
 	}
 
 	@Test
