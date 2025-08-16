@@ -17,7 +17,7 @@ abstract class EnsuringOnceWrapper {
 	 */
 	protected void markCalled() throws AssertionError {
 		if (called.getAndSet(true)) {
-			throw new AssertionError("Function was already called");
+			throw new AssertionError("Callback was already invoked");
 		}
 	}
 }
