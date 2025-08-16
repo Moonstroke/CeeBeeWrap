@@ -54,4 +54,44 @@ interfaces listed above.
 All these classes are implemented in a thread-safe manner, and can be used to
 wrap function objects shared by multiple threads.
 
+## Usage
+
+### As a Maven dependency
+
+This project is deployed in the Maven central repository, and simply needs to be
+listed as a test dependency in a user project's POM:
+
+    <dependencies>
+    	(...)
+    	<dependency>
+    		<groupId>io.github.moonstroke</groupId>
+    		<artifactId>ceebeewrap</artifactId>
+    		<version>0.1</version>
+    		<scope>test</scope>
+    	</dependency>
+    </dependencies>
+
+### Example
+
+Let's say that your application initializes lazily a `Properties` field in the
+`ConfManager` class using a user-provided `Supplier<Properties>`, and you want
+to test that the initialization method is only performed once. Heres is one way
+to write such a test using a CeeBeeWrap wrapper:
+
+
+    @Test
+    void testPropertiesOnlyEverInitializedOnce() {
+    	Supplier<Properties> propsSupplier = this::getTestProperties;
+    	ConfManager confMgr = new ConfManager();
+    	confMgr.setPropertiesSource(Wrapper.ensuringOnce(propsSupplier));
+    	
+    	// First call lazily initializes by calling the wrapped supplier
+    	confMgr.getProperties();
+    	// Second call won't re-initialize properties
+    	assertDoesNotThrow(confMgr::getProperties);
+    	
+    	// or, since the wrapper throws an exception of type suitable for test failures:
+    	confMgr.getProperties();
+    }
+
 [1]: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/AssertionError.html "Link to class AssertionError"
